@@ -16,7 +16,7 @@ const messageRoutes = require('./routes/message.routes');
 
 const app = express();
 
-// Connect to MongoDB
+// Connect to MongoDB (will continue without it if not available)
 connectDB();
 
 // Middleware
@@ -29,11 +29,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'fallback-secret-key',
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI
+        mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio'
     }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 // 1 day
@@ -49,7 +49,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/messages', messageRoutes);
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

@@ -1,57 +1,109 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { gsap } from 'gsap'
+import { motion } from 'framer-motion'
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false)
+
   useEffect(() => {
-    gsap.from('.navbar-item', {
-      y: -50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power2.out',
-    })
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-black/80 backdrop-blur-md">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-md transition-all duration-300 ${
+        isScrolled ? 'bg-black/90 shadow-lg' : 'bg-black/50'
+      }`}
+    >
       <div className="max-w-6xl px-4 py-6 mx-auto">
         <div className="flex items-center justify-between">
-          <div className="navbar-item">
-            <NavLink to="/" className="text-2xl font-bold text-white">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <NavLink to="/" className="text-2xl font-bold text-white transition-colors hover:text-accent">
               Portfolio
             </NavLink>
-          </div>
-          <div className="flex space-x-8">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex space-x-6"
+          >
             <NavLink
               to="/"
-              className="text-white transition-colors navbar-item hover:text-accent"
-              activeClassName="text-accent"
+              className={({ isActive }) =>
+                `text-white transition-colors hover:text-accent ${
+                  isActive ? 'text-accent' : ''
+                }`
+              }
             >
               Home
             </NavLink>
-            <a
-              href="#about"
-              className="text-white transition-colors navbar-item hover:text-accent"
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `text-white transition-colors hover:text-accent ${
+                  isActive ? 'text-accent' : ''
+                }`
+              }
             >
               About
-            </a>
-            <a
-              href="#projects"
-              className="text-white transition-colors navbar-item hover:text-accent"
+            </NavLink>
+            <NavLink
+              to="/projects"
+              className={({ isActive }) =>
+                `text-white transition-colors hover:text-accent ${
+                  isActive ? 'text-accent' : ''
+                }`
+              }
             >
               Projects
-            </a>
-            <a
-              href="#contact"
-              className="text-white transition-colors navbar-item hover:text-accent"
+            </NavLink>
+            <NavLink
+              to="/skills"
+              className={({ isActive }) =>
+                `text-white transition-colors hover:text-accent ${
+                  isActive ? 'text-accent' : ''
+                }`
+              }
+            >
+              Skills
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `text-white transition-colors hover:text-accent ${
+                  isActive ? 'text-accent' : ''
+                }`
+              }
             >
               Contact
-            </a>
-          </div>
+            </NavLink>
+            <NavLink
+              to="/links"
+              className={({ isActive }) =>
+                `text-white transition-colors hover:text-accent ${
+                  isActive ? 'text-accent' : ''
+                }`
+              }
+            >
+              Links
+            </NavLink>
+          </motion.div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   )
 }
 
