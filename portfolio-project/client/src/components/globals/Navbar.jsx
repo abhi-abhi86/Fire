@@ -9,34 +9,45 @@ const Navbar = () => {
       opacity: 0,
       duration: 0.8,
       stagger: 0.1,
-      ease: 'power3.out'
+      ease: 'power2.out',
     })
   }, [])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-black bg-opacity-50 backdrop-blur-md">
-      <div className="container px-4 py-4 mx-auto">
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-black/80 backdrop-blur-md">
+      <div className="max-w-6xl px-4 py-6 mx-auto">
         <div className="flex items-center justify-between">
           <div className="navbar-item">
-            <NavLink to="/" className="text-xl font-bold text-white">
+            <NavLink to="/" className="text-2xl font-bold text-white">
               Portfolio
             </NavLink>
           </div>
-          <div className="flex space-x-6">
+          <div className="flex space-x-8">
             <NavLink
               to="/"
-              className="text-white transition-colors navbar-item hover:text-gray-300"
-              activeClassName="text-blue-400"
+              className="text-white transition-colors navbar-item hover:text-accent"
+              activeClassName="text-accent"
             >
               Home
             </NavLink>
-            <NavLink
-              to="/admin"
-              className="text-white transition-colors navbar-item hover:text-gray-300"
-              activeClassName="text-blue-400"
+            <a
+              href="#about"
+              className="text-white transition-colors navbar-item hover:text-accent"
             >
-              Admin
-            </NavLink>
+              About
+            </a>
+            <a
+              href="#projects"
+              className="text-white transition-colors navbar-item hover:text-accent"
+            >
+              Projects
+            </a>
+            <a
+              href="#contact"
+              className="text-white transition-colors navbar-item hover:text-accent"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </div>

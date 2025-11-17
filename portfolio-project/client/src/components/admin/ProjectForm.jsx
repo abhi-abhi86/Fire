@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import api from '../../lib/api'
-import AnimatedInput from '../ui/AnimatedInput'
-import MagneticButton from '../ui/MagneticButton'
 
 const ProjectForm = () => {
   const [projects, setProjects] = useState([])
@@ -13,7 +11,7 @@ const ProjectForm = () => {
     imageUrl: '',
     githubUrl: '',
     liveUrl: '',
-    techTags: ''
+    techTags: '',
   })
   const [loading, setLoading] = useState(false)
 
@@ -34,7 +32,7 @@ const ProjectForm = () => {
     const { name, value } = e.target
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     })
   }
 
@@ -43,15 +41,18 @@ const ProjectForm = () => {
     setLoading(true)
 
     try {
-      const dataToSend = {
-        ...formData,
-        techTags: formData.techTags.split(',').map(tag => tag.trim())
-      }
+      const techTagsArray = formData.techTags.split(',').map(tag => tag.trim()).filter(tag => tag)
 
       if (editingProject) {
-        await api.put(`/projects/${editingProject._id}`, dataToSend)
+        await api.put(`/projects/${editingProject._id}`, {
+          ...formData,
+          techTags: techTagsArray,
+        })
       } else {
-        await api.post('/projects', dataToSend)
+        await api.post('/projects', {
+          ...formData,
+          techTags: techTagsArray,
+        })
       }
 
       setFormData({
@@ -61,7 +62,7 @@ const ProjectForm = () => {
         imageUrl: '',
         githubUrl: '',
         liveUrl: '',
-        techTags: ''
+        techTags: '',
       })
       setEditingProject(null)
       fetchProjects()
@@ -79,9 +80,9 @@ const ProjectForm = () => {
       shortDescription: project.shortDescription,
       fullDescription: project.fullDescription,
       imageUrl: project.imageUrl,
-      githubUrl: project.githubUrl,
-      liveUrl: project.liveUrl,
-      techTags: project.techTags.join(', ')
+      githubUrl: project.githubUrl || '',
+      liveUrl: project.liveUrl || '',
+      techTags: project.techTags.join(', '),
     })
   }
 
@@ -105,118 +106,145 @@ const ProjectForm = () => {
       imageUrl: '',
       githubUrl: '',
       liveUrl: '',
-      techTags: ''
+      techTags: '',
     })
   }
 
   return (
     <div className="space-y-8">
-      <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow">
-        <h2 className="mb-6 text-2xl font-bold">
-          {editingProject ? 'Edit Project' : 'Add New Project'}
-        </h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <AnimatedInput
-            type="text"
-            name="title"
-            placeholder="Project Title"
-            value={formData.title}
-            onChange={handleInputChange}
-            required
-          />
-          <AnimatedInput
-            type="text"
-            name="shortDescription"
-            placeholder="Short Description"
-            value={formData.shortDescription}
-            onChange={handleInputChange}
-            required
-          />
-          <AnimatedInput
-            type="textarea"
-            name="fullDescription"
-            placeholder="Full Description"
-            value={formData.fullDescription}
-            onChange={handleInputChange}
-            required
-          />
-          <AnimatedInput
-            type="url"
-            name="imageUrl"
-            placeholder="Image URL"
-            value={formData.imageUrl}
-            onChange={handleInputChange}
-          />
-          <AnimatedInput
-            type="url"
-            name="githubUrl"
-            placeholder="GitHub URL"
-            value={formData.githubUrl}
-            onChange={handleInputChange}
-          />
-          <AnimatedInput
-            type="url"
-            name="liveUrl"
-            placeholder="Live Demo URL"
-            value={formData.liveUrl}
-            onChange={handleInputChange}
-          />
-          <div className="md:col-span-2">
-            <AnimatedInput
+      <h2 className="text-2xl font-bold text-white">
+        {editingProject ? 'Edit Project' : 'Add New Project'}
+      </h2>
+
+      <form onSubmit={handleSubmit} className="p-6 space-y-4 bg-gray-800 rounded-lg">
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <label className="block mb-2 text-white">Title</label>
+            <input
               type="text"
-              name="techTags"
-              placeholder="Tech Tags (comma-separated)"
-              value={formData.techTags}
+              name="title"
+              value={formData.title}
               onChange={handleInputChange}
+              className="w-full p-2 text-white bg-gray-700 rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-white">Image URL</label>
+            <input
+              type="url"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleInputChange}
+              className="w-full p-2 text-white bg-gray-700 rounded"
+              required
             />
           </div>
         </div>
-        <div className="flex mt-6 space-x-4">
-          <MagneticButton
+
+        <div>
+          <label className="block mb-2 text-white">Short Description</label>
+          <input
+            type="text"
+            name="shortDescription"
+            value={formData.shortDescription}
+            onChange={handleInputChange}
+            className="w-full p-2 text-white bg-gray-700 rounded"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-2 text-white">Full Description</label>
+          <textarea
+            name="fullDescription"
+            value={formData.fullDescription}
+            onChange={handleInputChange}
+            rows={4}
+            className="w-full p-2 text-white bg-gray-700 rounded"
+            required
+          />
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <label className="block mb-2 text-white">GitHub URL</label>
+            <input
+              type="url"
+              name="githubUrl"
+              value={formData.githubUrl}
+              onChange={handleInputChange}
+              className="w-full p-2 text-white bg-gray-700 rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-white">Live URL</label>
+            <input
+              type="url"
+              name="liveUrl"
+              value={formData.liveUrl}
+              onChange={handleInputChange}
+              className="w-full p-2 text-white bg-gray-700 rounded"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block mb-2 text-white">Tech Tags (comma-separated)</label>
+          <input
+            type="text"
+            name="techTags"
+            value={formData.techTags}
+            onChange={handleInputChange}
+            className="w-full p-2 text-white bg-gray-700 rounded"
+            placeholder="React, Node.js, MongoDB"
+          />
+        </div>
+
+        <div className="flex space-x-4">
+          <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className="text-black btn bg-accent hover:bg-accent/80"
           >
-            {loading ? 'Saving...' : editingProject ? 'Update Project' : 'Add Project'}
-          </MagneticButton>
+            {loading ? 'Saving...' : (editingProject ? 'Update Project' : 'Add Project')}
+          </button>
           {editingProject && (
-            <MagneticButton
+            <button
               type="button"
               onClick={handleCancel}
-              className="px-6 py-2 text-white bg-gray-600 rounded hover:bg-gray-700"
+              className="bg-gray-600 btn hover:bg-gray-500"
             >
               Cancel
-            </MagneticButton>
+            </button>
           )}
         </div>
       </form>
 
-      <div className="p-6 bg-white rounded-lg shadow">
-        <h2 className="mb-6 text-2xl font-bold">Existing Projects</h2>
-        <div className="space-y-4">
-          {projects.map((project) => (
-            <div key={project._id} className="flex items-center justify-between p-4 border rounded">
-              <div>
-                <h3 className="font-semibold">{project.title}</h3>
-                <p className="text-sm text-gray-600">{project.shortDescription}</p>
-              </div>
-              <div className="space-x-2">
-                <button
-                  onClick={() => handleEdit(project)}
-                  className="px-3 py-1 text-sm text-white bg-yellow-600 rounded hover:bg-yellow-700"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(project._id)}
-                  className="px-3 py-1 text-sm text-white bg-red-600 rounded hover:bg-red-700"
-                >
-                  Delete
-                </button>
-              </div>
+      <div className="space-y-4">
+        <h3 className="text-xl font-bold text-white">Existing Projects</h3>
+        {projects.map((project) => (
+          <div key={project._id} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+            <div>
+              <h4 className="font-semibold text-white">{project.title}</h4>
+              <p className="text-gray-400">{project.shortDescription}</p>
             </div>
-          ))}
-        </div>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleEdit(project)}
+                className="bg-blue-600 btn hover:bg-blue-700"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(project._id)}
+                className="bg-red-600 btn hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

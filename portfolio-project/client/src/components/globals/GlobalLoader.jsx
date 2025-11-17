@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const GlobalLoader = () => {
@@ -15,8 +15,7 @@ const GlobalLoader = () => {
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black"
-      initial={{ y: 0 }}
-      animate={isLoaded ? { y: "-100%" } : { y: 0 }}
+      animate={{ y: isLoaded ? "-100%" : "0%" }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
       <div className="text-4xl font-bold text-white">

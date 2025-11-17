@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+ximport { useRef, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { TorusKnot, OrbitControls } from '@react-three/drei'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
@@ -12,8 +12,10 @@ const Model = () => {
 
   useFrame((state) => {
     const { mouse } = state
-    meshRef.current.rotation.x = mouse.y * 0.1
-    meshRef.current.rotation.y = mouse.x * 0.1
+    if (meshRef.current) {
+      meshRef.current.rotation.x = mouse.y * 0.5
+      meshRef.current.rotation.y = mouse.x * 0.5
+    }
   })
 
   useEffect(() => {
@@ -26,7 +28,14 @@ const Model = () => {
       },
     })
 
-    tl.to(meshRef.current.rotation, { y: Math.PI * 2, ease: 'none' })
+    tl.to(meshRef.current.rotation, {
+      y: Math.PI * 2,
+      ease: 'none',
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
   }, [])
 
   return (
@@ -38,10 +47,8 @@ const Model = () => {
         roughness={0}
         ior={1.5}
         thickness={0.5}
-        envMapIntensity={1}
         clearcoat={1}
-        clearcoatRoughness={0}
-        color="#ffffff"
+        clearcoatRoughness={0.1}
       />
     </TorusKnot>
   )
@@ -49,23 +56,27 @@ const Model = () => {
 
 const Hero = () => {
   return (
-    <section className="relative flex items-center justify-center h-screen overflow-hidden hero-section">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[-10, -10, -5]} intensity={0.5} />
-        <Model />
-        <OrbitControls enableZoom={false} enablePan={false} />
-        <EffectComposer>
-          <Bloom intensity={0.5} />
-          <Vignette eskil={false} offset={0.1} darkness={0.5} />
-        </EffectComposer>
-      </Canvas>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="z-10 text-center text-white">
-          <h1 className="mb-4 text-6xl font-bold md:text-8xl">Portfolio</h1>
-          <p className="text-xl md:text-2xl">Creative Developer</p>
-        </div>
+    <section className="relative flex items-center justify-center h-screen overflow-hidden bg-black hero-section">
+      <div className="absolute inset-0">
+        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} />
+          <Model />
+          <OrbitControls enableZoom={false} enablePan={false} />
+          <EffectComposer>
+            <Bloom intensity={0.5} />
+            <Vignette eskil={false} offset={0.1} darkness={0.5} />
+          </EffectComposer>
+        </Canvas>
+      </div>
+      <div className="relative z-10 text-center text-white">
+        <h1 className="mb-4 text-6xl font-bold md:text-8xl">
+          Hi, I'm <span className="text-accent">Abhishek M G</span>
+        </h1>
+        <p className="text-xl md:text-2xl opacity-80">
+          Aspiring Python Developer
+        </p>
       </div>
     </section>
   )

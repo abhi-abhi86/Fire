@@ -7,40 +7,42 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState('')
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus(null)
+    setIsLoading(true)
+    setStatus('')
 
     try {
       await api.post('/messages', formData)
-      setSubmitStatus('success')
+      setStatus('Message sent successfully!')
       setFormData({ name: '', email: '', message: '' })
     } catch (error) {
-      setSubmitStatus('error')
+      setStatus('Failed to send message. Please try again.')
     } finally {
-      setIsSubmitting(false)
+      setIsLoading(false)
     }
   }
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container px-4 mx-auto">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="mb-12 text-4xl font-bold text-center md:text-6xl">Get In Touch</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
+    <section id="contact" className="py-20 text-white bg-black">
+      <div className="max-w-4xl px-4 mx-auto">
+        <h2 className="mb-12 text-4xl font-bold text-center md:text-6xl">
+          Get In Touch
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="grid gap-8 md:grid-cols-2">
             <AnimatedInput
               type="text"
               name="name"
@@ -57,33 +59,30 @@ const Contact = () => {
               onChange={handleChange}
               required
             />
-            <AnimatedInput
-              type="textarea"
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            />
-            <div className="text-center">
-              <MagneticButton
-                type="submit"
-                disabled={isSubmitting}
-                className={`px-8 py-3 rounded-full font-semibold transition-colors ${
-                  isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : submitStatus === 'success'
-                    ? 'bg-green-500 hover:bg-green-600'
-                    : submitStatus === 'error'
-                    ? 'bg-red-500 hover:bg-red-600'
-                    : 'bg-blue-500 hover:bg-blue-600'
-                } text-white`}
-              >
-                {isSubmitting ? 'Sending...' : submitStatus === 'success' ? 'Sent!' : submitStatus === 'error' ? 'Error' : 'Send Message'}
-              </MagneticButton>
-            </div>
-          </form>
-        </div>
+          </div>
+          <AnimatedInput
+            type="textarea"
+            name="message"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          />
+          <div className="text-center">
+            <MagneticButton
+              type="submit"
+              disabled={isLoading}
+              className="px-8 py-4 font-semibold text-black transition-colors bg-white rounded-full hover:bg-gray-200"
+            >
+              {isLoading ? 'Sending...' : 'Send Message'}
+            </MagneticButton>
+          </div>
+          {status && (
+            <p className={`text-center ${status.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
+              {status}
+            </p>
+          )}
+        </form>
       </div>
     </section>
   )

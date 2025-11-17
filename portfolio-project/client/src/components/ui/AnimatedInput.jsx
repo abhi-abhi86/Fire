@@ -1,11 +1,4 @@
-import { useState } from 'react'
-
 const AnimatedInput = ({ type = 'text', name, placeholder, value, onChange, required }) => {
-  const [isFocused, setIsFocused] = useState(false)
-
-  const handleFocus = () => setIsFocused(true)
-  const handleBlur = () => setIsFocused(false)
-
   return (
     <div className="relative">
       <input
@@ -13,17 +6,12 @@ const AnimatedInput = ({ type = 'text', name, placeholder, value, onChange, requ
         name={name}
         value={value}
         onChange={onChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         required={required}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md peer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="w-full px-4 py-3 text-white placeholder-transparent bg-transparent border-b-2 border-gray-600 focus:outline-none focus:border-accent peer"
+        placeholder={placeholder}
       />
       <label
-        className={`absolute left-3 transition-all duration-200 pointer-events-none ${
-          isFocused || value
-            ? 'top-0 text-xs text-blue-600 bg-white px-1 transform -translate-y-1/2'
-            : 'top-1/2 text-gray-500 transform -translate-y-1/2'
-        }`}
+        className="absolute text-gray-400 transition-all duration-300 left-4 top-3 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm peer-focus:text-accent peer-valid:top-0 peer-valid:text-sm peer-valid:text-accent"
       >
         {placeholder}
       </label>

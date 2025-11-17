@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const useMouseHover = () => {
+const useMouseHover = () => {
     const [isHovering, setIsHovering] = useState(false)
 
     useEffect(() => {
@@ -8,6 +8,7 @@ export const useMouseHover = () => {
         const handleMouseLeave = () => setIsHovering(false)
 
         const hoverElements = document.querySelectorAll('a, button, [data-hover]')
+
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', handleMouseEnter)
             el.addEventListener('mouseleave', handleMouseLeave)
@@ -23,3 +24,5 @@ export const useMouseHover = () => {
 
     return isHovering
 }
+
+export default useMouseHover

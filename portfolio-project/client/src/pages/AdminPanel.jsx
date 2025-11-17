@@ -14,7 +14,11 @@ const AdminPanel = () => {
   }, [user, isLoading, navigate])
 
   if (isLoading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <div className="text-white">Loading...</div>
+      </div>
+    )
   }
 
   if (!user || !user.isAdmin) {

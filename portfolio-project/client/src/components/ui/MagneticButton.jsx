@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 
 const MagneticButton = ({ children, className, ...props }) => {
-  const buttonRef = useRef()
+  const buttonRef = useRef(null)
 
   useEffect(() => {
     const button = buttonRef.current
@@ -17,7 +17,7 @@ const MagneticButton = ({ children, className, ...props }) => {
         x: x * 0.3,
         y: y * 0.3,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: 'power2.out',
       })
     }
 
@@ -26,7 +26,7 @@ const MagneticButton = ({ children, className, ...props }) => {
         x: 0,
         y: 0,
         duration: 0.5,
-        ease: 'elastic.out(1, 0.3)'
+        ease: 'elastic.out(1, 0.3)',
       })
     }
 
@@ -40,7 +40,11 @@ const MagneticButton = ({ children, className, ...props }) => {
   }, [])
 
   return (
-    <button ref={buttonRef} className={className} {...props}>
+    <button
+      ref={buttonRef}
+      className={`inline-block ${className}`}
+      {...props}
+    >
       {children}
     </button>
   )
