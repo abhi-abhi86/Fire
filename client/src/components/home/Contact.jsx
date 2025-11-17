@@ -47,7 +47,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="p-8 space-y-8 border-4 border-accent"
+            className="p-8 space-y-8 bg-black border-4 border-accent"
           >
             <div className="grid gap-8 md:grid-cols-2">
               <motion.div

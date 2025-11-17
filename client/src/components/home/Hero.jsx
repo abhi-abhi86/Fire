@@ -42,7 +42,7 @@ const DataStream = () => {
 
   return (
     <div className="absolute z-10 transform -translate-y-1/2 right-8 top-1/2">
-      <div className="p-4 font-mono text-sm border-2 text-mono text-accent border-accent bg-black/80">
+      <div className="p-4 font-mono text-sm bg-black border-4 text-mono text-accent border-accent glow-accent">
         {codeLines.map((line, index) => (
           <motion.div
             key={index}
@@ -128,7 +128,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="relative z-10 p-8 text-center text-white border-4 border-accent"
+        className="relative z-10 p-8 text-center text-white border-4 border-accent bg-black/90 glow-accent"
       >
         <motion.h1
           initial={{ opacity: 0, scale: 0.8 }}

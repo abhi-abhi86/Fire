@@ -21,7 +21,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="p-8 space-y-6 border-4 border-accent"
+            className="p-8 space-y-6 bg-black border-4 border-accent"
           >
             <p className="text-lg leading-relaxed md:text-xl">
               Hi, I'm Abhishek M G, an aspiring Python Developer currently pursuing a Bachelor of Computer Applications (B.C.A).

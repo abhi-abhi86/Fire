@@ -80,7 +80,7 @@ const Skills = () => {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.05, boxShadow: '0 0 15px #00ff88' }}
-                    className="flex flex-col items-center justify-center p-6 transition-all border-3 border-accent hover:glow-accent group"
+                    className="flex flex-col items-center justify-center p-6 transition-all bg-black border-3 border-accent hover:glow-accent group"
                   >
                     <skill.icon className={`text-4xl mb-3 ${skill.color} group-hover:scale-110 transition-transform`} />
                     <span className="font-mono text-sm font-medium text-center">{skill.name}</span>
@@ -111,7 +111,7 @@ const Skills = () => {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.05, boxShadow: '0 0 15px #00ff88' }}
-                    className="flex flex-col items-center justify-center p-6 transition-all border-3 border-accent hover:glow-accent group"
+                    className="flex flex-col items-center justify-center p-6 transition-all bg-black border-3 border-accent hover:glow-accent group"
                   >
                     <skill.icon className={`text-4xl mb-3 ${skill.color} group-hover:scale-110 transition-transform`} />
                     <span className="font-mono text-sm font-medium text-center">{skill.name}</span>

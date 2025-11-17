@@ -76,7 +76,7 @@ const Projects = () => {
                 key={project.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02, boxShadow: '0 0 20px #00ff88' }}
-                className="relative overflow-hidden card-brutalist"
+                className="relative overflow-hidden bg-black card-brutalist"
               >
                 {/* Geometric Pattern */}
                 <div className="absolute top-4 right-4 opacity-20">

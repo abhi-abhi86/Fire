@@ -19,7 +19,7 @@ const Navbar = () => {
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className={`fixed left-0 top-0 h-full w-64 z-40 border-r-4 border-accent bg-black transition-all duration-300 ${
+      className={`fixed left-0 top-0 h-full w-64 z-40 border-r-4 border-accent bg-black transition-all duration-300 glow-accent ${
         isScrolled ? 'shadow-2xl' : ''
       }`}
     >
