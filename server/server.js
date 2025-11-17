@@ -33,7 +33,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio'
+        mongoUrl: 'mongodb://localhost:27017/portfolio'
     }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 // 1 day
