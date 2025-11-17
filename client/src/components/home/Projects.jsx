@@ -50,64 +50,74 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-20 text-white bg-black">
-      <div className="max-w-6xl px-4 mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-12 text-4xl font-bold text-center md:text-6xl"
-        >
-          My Projects
-        </motion.h2>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              className="p-6 transition-transform bg-gray-800 rounded-lg"
-            >
-              <h3 className="mb-3 text-xl font-bold">{project.title}</h3>
-              <p className="mb-4 text-gray-300">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.techTags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 text-xs text-black rounded-full bg-accent"
+    <section id="projects" className="py-20 pl-64 text-white bg-black">
+      <div className="grid-brutalist">
+        <div className="grid-item-1">
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="p-6 text-4xl font-bold border-4 md:text-6xl text-display border-accent"
+          >
+            PROJECTS
+          </motion.h2>
+        </div>
+        <div className="grid-item-2">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid gap-8 md:grid-cols-2"
+          >
+            {projects.map((project) => (
+              <motion.div
+                key={project.id}
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, boxShadow: '0 0 20px #00ff88' }}
+                className="relative overflow-hidden card-brutalist"
+              >
+                {/* Geometric Pattern */}
+                <div className="absolute top-4 right-4 opacity-20">
+                  <svg width="40" height="40" viewBox="0 0 40 40">
+                    <polygon points="20,5 35,20 20,35 5,20" fill="#00ff88" />
+                  </svg>
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-display">{project.title}</h3>
+                <p className="mb-4 opacity-80">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.techTags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 font-mono text-xs text-black border-2 bg-accent border-accent"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex space-x-4">
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 transition-all border-2 text-accent hover:glow-accent border-accent hover:bg-accent hover:text-black"
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="flex space-x-4">
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent hover:underline"
-                >
-                  GitHub
-                </a>
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent hover:underline"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                    GITHUB
+                  </a>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 transition-all border-2 text-accent hover:glow-accent border-accent hover:bg-accent hover:text-black"
+                  >
+                    LIVE
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )

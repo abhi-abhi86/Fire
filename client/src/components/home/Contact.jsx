@@ -27,99 +27,103 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-20 text-white bg-gray-900">
-      <div className="max-w-4xl px-4 mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-12 text-4xl font-bold text-center md:text-6xl"
-        >
-          Get In Touch
-        </motion.h2>
-        <motion.form
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          onSubmit={handleSubmit}
-          className="space-y-8"
-        >
-          <div className="grid gap-8 md:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 text-white bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-accent"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 text-white bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-accent"
-              />
-            </motion.div>
-          </div>
-          <motion.div
+    <section id="contact" className="py-20 pl-64 text-white bg-black">
+      <div className="grid-brutalist">
+        <div className="grid-item-1">
+          <motion.h2
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="p-6 text-4xl font-bold border-4 md:text-6xl text-display border-accent"
           >
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              className="w-full px-4 py-3 text-white bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-accent"
-            />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            CONTACT
+          </motion.h2>
+        </div>
+        <div className="grid-item-2">
+          <motion.form
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-center"
+            onSubmit={handleSubmit}
+            className="p-8 space-y-8 border-4 border-accent"
           >
-            <button
-              type="submit"
-              className="px-8 py-4 font-semibold text-black transition-colors rounded-full bg-accent hover:bg-opacity-80"
+            <div className="grid gap-8 md:grid-cols-2">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="YOUR NAME"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 font-mono text-white bg-black border-3 border-accent focus:outline-none focus:glow-accent"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="YOUR EMAIL"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 font-mono text-white bg-black border-3 border-accent focus:outline-none focus:glow-accent"
+                />
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
             >
-              Send Message
-            </button>
-          </motion.div>
-          {status && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center text-green-400"
+              <textarea
+                name="message"
+                placeholder="YOUR MESSAGE"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className="w-full px-4 py-3 font-mono text-white bg-black border-3 border-accent focus:outline-none focus:glow-accent"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center"
             >
-              {status}
-            </motion.p>
-          )}
-        </motion.form>
+              <button
+                type="submit"
+                className="btn"
+              >
+                SEND MESSAGE
+              </button>
+            </motion.div>
+            {status && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="font-mono text-center text-accent glow-accent"
+              >
+                {status}
+              </motion.p>
+            )}
+          </motion.form>
+        </div>
       </div>
     </section>
   )
