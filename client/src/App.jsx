@@ -19,6 +19,7 @@ function App() {
 
   return (
     <div className="min-h-screen text-white bg-black">
+      <GlobalLoader />
       <CustomCursor />
       <Navbar />
       <AnimatePresence mode="wait">
