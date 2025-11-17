@@ -52,7 +52,7 @@
 
 ## Followup Steps
 - [x] Install server dependencies (npm install in server/)
-- [ ] Install client dependencies (npm install in client/)
+- [x] Install client dependencies (npm install in client/)
 - [ ] Test server (npm run dev)
 - [ ] Test client (npm run dev)
 - [ ] Verify full app functionality
