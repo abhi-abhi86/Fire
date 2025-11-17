@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { motion } from 'framer-motion'
 
 const CustomCursor = () => {
   const cursorRef = useRef(null)
@@ -54,13 +55,19 @@ const CustomCursor = () => {
 
   return (
     <>
-      <div
+      <motion.div
         ref={cursorRef}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="fixed top-0 left-0 z-50 w-6 h-6 border-2 border-white rounded-full pointer-events-none mix-blend-difference"
         style={{ transform: 'translate(-50%, -50%)' }}
       />
-      <div
+      <motion.div
         ref={dotRef}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className="fixed top-0 left-0 z-50 w-1 h-1 bg-white rounded-full pointer-events-none mix-blend-difference"
         style={{ transform: 'translate(-50%, -50%)' }}
       />
