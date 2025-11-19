@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import AnimatedCard from '../ui/AnimatedCard'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -41,13 +42,9 @@ const Contact = () => {
           </motion.h2>
         </div>
         <div className="grid-item-2">
-          <motion.form
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            onSubmit={handleSubmit}
-            className="p-8 space-y-8 bg-black border-4 border-accent"
+          <AnimatedCard
+            className="space-y-8"
+            glassmorphism={true}
           >
             <div className="grid gap-8 md:grid-cols-2">
               <motion.div
@@ -56,14 +53,16 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <input
+                <motion.input
                   type="text"
                   name="name"
                   placeholder="YOUR NAME"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 font-mono text-white bg-black border-3 border-accent focus:outline-none focus:glow-accent"
+                  className="w-full px-4 py-3 font-mono text-white bg-transparent border-2 border-accent focus:outline-none focus:glow focus:border-fire-orange"
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 />
               </motion.div>
               <motion.div
@@ -72,14 +71,16 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <input
+                <motion.input
                   type="email"
                   name="email"
                   placeholder="YOUR EMAIL"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 font-mono text-white bg-black border-3 border-accent focus:outline-none focus:glow-accent"
+                  className="w-full px-4 py-3 font-mono text-white bg-transparent border-2 border-accent focus:outline-none focus:glow focus:border-fire-orange"
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 />
               </motion.div>
             </div>
@@ -89,14 +90,16 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <textarea
+              <motion.textarea
                 name="message"
                 placeholder="YOUR MESSAGE"
                 value={formData.message}
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 font-mono text-white bg-black border-3 border-accent focus:outline-none focus:glow-accent"
+                className="w-full px-4 py-3 font-mono text-white bg-transparent border-2 resize-none border-accent focus:outline-none focus:glow focus:border-fire-orange"
+                whileFocus={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
               />
             </motion.div>
             <motion.div
@@ -117,12 +120,12 @@ const Contact = () => {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="font-mono text-center text-accent glow-accent"
+                className="font-mono text-center text-accent glow"
               >
                 {status}
               </motion.p>
             )}
-          </motion.form>
+          </AnimatedCard>
         </div>
       </div>
     </section>

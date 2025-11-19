@@ -4,21 +4,21 @@ import { motion } from 'framer-motion'
 
 const Skills = () => {
   const proficientSkills = [
-    { name: 'Python', icon: FaPython, color: 'text-accent' },
-    { name: 'NumPy', icon: SiNumpy, color: 'text-accent' },
-    { name: 'Pandas', icon: SiPandas, color: 'text-accent' },
-    { name: 'MySQL', icon: SiMysql, color: 'text-accent' },
-    { name: 'SQLite', icon: SiSqlite, color: 'text-accent' },
-    { name: 'Git', icon: FaGitAlt, color: 'text-accent' },
+    { name: 'Python', icon: FaPython },
+    { name: 'NumPy', icon: SiNumpy },
+    { name: 'Pandas', icon: SiPandas },
+    { name: 'MySQL', icon: SiMysql },
+    { name: 'SQLite', icon: SiSqlite },
+    { name: 'Git', icon: FaGitAlt },
   ]
 
   const familiarSkills = [
-    { name: 'scikit-learn', icon: SiScikitlearn, color: 'text-accent' },
-    { name: 'PyTorch', icon: SiPytorch, color: 'text-accent' },
-    { name: 'Hugging Face', icon: SiPytorch, color: 'text-accent' },
-    { name: 'PyQt6', icon: SiQt, color: 'text-accent' },
-    { name: 'Beautiful Soup', icon: FaCode, color: 'text-accent' },
-    { name: 'Unit Testing', icon: FaCode, color: 'text-accent' },
+    { name: 'scikit-learn', icon: SiScikitlearn },
+    { name: 'PyTorch', icon: SiPytorch },
+    { name: 'Hugging Face', icon: SiPytorch },
+    { name: 'PyQt6', icon: SiQt },
+    { name: 'Beautiful Soup', icon: FaCode },
+    { name: 'Unit Testing', icon: FaCode },
   ]
 
   const containerVariants = {
@@ -43,82 +43,86 @@ const Skills = () => {
   }
 
   return (
-    <section className="py-20 pl-64 text-white bg-black">
-      <div className="grid-brutalist">
-        <div className="grid-item-1">
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="p-6 text-4xl font-bold border-4 md:text-6xl text-display border-accent"
-          >
-            SKILLS
-          </motion.h2>
-        </div>
-        <div className="grid-item-2">
-          <div className="space-y-12">
-            <div>
-              <motion.h3
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="inline-block p-3 mb-6 text-2xl font-semibold border-2 text-accent border-accent"
-              >
-                PROFICIENT
-              </motion.h3>
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid grid-cols-2 gap-6 md:grid-cols-3"
-              >
-                {proficientSkills.map((skill, index) => (
+    <section className="py-20 bg-gray-50">
+      <div className="px-4 mx-auto max-w-7xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-16 text-4xl font-bold text-center text-black md:text-6xl text-display"
+        >
+          SKILLS
+        </motion.h2>
+        <div className="space-y-16">
+          <div>
+            <motion.h3
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mb-8 text-2xl font-semibold text-center text-black"
+            >
+              PROFICIENT
+            </motion.h3>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6"
+            >
+              {proficientSkills.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="flex flex-col items-center justify-center p-6 transition-shadow duration-300 bg-white rounded-lg shadow-sm hover:shadow-md group"
+                >
                   <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05, boxShadow: '0 0 15px #00ff88' }}
-                    className="flex flex-col items-center justify-center p-6 transition-all bg-black border-3 border-accent hover:glow-accent group"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <skill.icon className={`text-4xl mb-3 ${skill.color} group-hover:scale-110 transition-transform`} />
-                    <span className="font-mono text-sm font-medium text-center">{skill.name}</span>
+                    <skill.icon className="mb-3 text-4xl text-gray-800 transition-colors group-hover:text-black" />
                   </motion.div>
-                ))}
-              </motion.div>
-            </div>
+                  <span className="text-sm font-medium text-center text-gray-700">{skill.name}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
 
-            <div>
-              <motion.h3
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="inline-block p-3 mb-6 text-2xl font-semibold border-2 text-accent border-accent"
-              >
-                FAMILIAR
-              </motion.h3>
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid grid-cols-2 gap-6 md:grid-cols-3"
-              >
-                {familiarSkills.map((skill, index) => (
+          <div>
+            <motion.h3
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="mb-8 text-2xl font-semibold text-center text-black"
+            >
+              FAMILIAR
+            </motion.h3>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6"
+            >
+              {familiarSkills.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="flex flex-col items-center justify-center p-6 transition-shadow duration-300 bg-white rounded-lg shadow-sm hover:shadow-md group"
+                >
                   <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05, boxShadow: '0 0 15px #00ff88' }}
-                    className="flex flex-col items-center justify-center p-6 transition-all bg-black border-3 border-accent hover:glow-accent group"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <skill.icon className={`text-4xl mb-3 ${skill.color} group-hover:scale-110 transition-transform`} />
-                    <span className="font-mono text-sm font-medium text-center">{skill.name}</span>
+                    <skill.icon className="mb-3 text-4xl text-gray-600 transition-colors group-hover:text-gray-800" />
                   </motion.div>
-                ))}
-              </motion.div>
-            </div>
+                  <span className="text-sm font-medium text-center text-gray-600">{skill.name}</span>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>

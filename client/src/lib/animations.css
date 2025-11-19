@@ -1,0 +1,155 @@
+/* Fire-themed animations and effects */
+
+@keyframes fireGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 5px #ff4500, 0 0 10px #ff4500, 0 0 15px #ff4500;
+    }
+    50% {
+        box-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff4500, 0 0 40px #ff4500;
+    }
+}
+
+@keyframes emberFloat {
+    0% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.8;
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px) rotate(90deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-40px) translateX(-5px) rotate(180deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-20px) translateX(-10px) rotate(270deg);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(0px) translateX(0px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flameFlicker {
+    0%,
+    100% {
+        transform: scaleY(1) scaleX(1);
+    }
+    25% {
+        transform: scaleY(1.1) scaleX(0.95);
+    }
+    50% {
+        transform: scaleY(0.95) scaleX(1.05);
+    }
+    75% {
+        transform: scaleY(1.05) scaleX(0.98);
+    }
+}
+
+@keyframes heatWave {
+    0% {
+        transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+        transform: translateX(100%) skewX(-15deg);
+    }
+}
+
+@keyframes particleRise {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Utility classes */
+
+.fire-glow {
+    animation: fireGlow 2s ease-in-out infinite;
+}
+
+.ember-float {
+    animation: emberFloat 4s ease-in-out infinite;
+}
+
+.flame-flicker {
+    animation: flameFlicker 0.5s ease-in-out infinite alternate;
+}
+
+.heat-wave {
+    animation: heatWave 3s linear infinite;
+}
+
+.particle-rise {
+    animation: particleRise 6s ease-out infinite;
+}
+
+
+/* Glassmorphism effects */
+
+.glass-card {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 69, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(255, 69, 0, 0.1);
+}
+
+.glass-card:hover {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 69, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(255, 69, 0, 0.2);
+}
+
+
+/* Scroll-triggered animations */
+
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .scroll-fade-in.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .scroll-scale-in {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .scroll-scale-in.in-view {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Accessibility: Respect user's motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .fire-glow,
+    .ember-float,
+    .flame-flicker,
+    .heat-wave,
+    .particle-rise {
+        animation: none;
+    }
+    .glass-card:hover {
+        transform: none;
+    }
+}

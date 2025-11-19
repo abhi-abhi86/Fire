@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import Hero3D from '../home/Hero3D'
 
 const GlobalLoader = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -27,30 +30,30 @@ const GlobalLoader = () => {
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
       <div className="text-center">
+        {/* 3D Fire Background */}
+        <div className="absolute inset-0">
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+            <Hero3D />
+            <OrbitControls enableZoom={false} enablePan={false} />
+          </Canvas>
+        </div>
+
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-8"
+          className="relative z-10 mb-8"
         >
-          <div className="relative">
-            <motion.div
-              className="w-32 h-32 border-4 border-gray-600 rounded-full"
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div
-              className="absolute top-0 left-0 w-32 h-32 border-4 rounded-full border-accent"
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-              style={{
-                clipPath: `polygon(0 0, 100% 0, 100% 50%, 0 50%)`,
-                transformOrigin: 'center'
-              }}
-            />
-          </div>
+          <motion.div
+            className="relative w-32 h-32"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          >
+            {/* Fire ring */}
+            <div className="absolute inset-0 border-4 rounded-full border-fire-orange animate-pulse-fire" />
+            <div className="absolute border-2 rounded-full inset-2 border-fire-yellow animate-pulse-fire" style={{ animationDelay: '0.5s' }} />
+            <div className="absolute border-2 rounded-full inset-4 border-fire-red animate-pulse-fire" style={{ animationDelay: '1s' }} />
+          </motion.div>
         </motion.div>
 
         <motion.h1

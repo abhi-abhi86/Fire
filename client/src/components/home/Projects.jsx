@@ -8,7 +8,8 @@ const Projects = () => {
       description: 'A modern portfolio website built with React and Three.js featuring smooth animations and interactive 3D elements.',
       techTags: ['React', 'Three.js', 'GSAP', 'Tailwind CSS'],
       githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com'
+      liveUrl: 'https://example.com',
+      image: 'https://via.placeholder.com/400x300/000000/FFFFFF?text=Portfolio'
     },
     {
       id: '2',
@@ -16,7 +17,8 @@ const Projects = () => {
       description: 'Full-stack e-commerce solution with payment integration, user authentication, and admin dashboard.',
       techTags: ['Node.js', 'MongoDB', 'Stripe', 'React'],
       githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com'
+      liveUrl: 'https://example.com',
+      image: 'https://via.placeholder.com/400x300/000000/FFFFFF?text=E-commerce'
     },
     {
       id: '3',
@@ -24,7 +26,8 @@ const Projects = () => {
       description: 'Python-based data analysis application with GUI for processing and visualizing datasets.',
       techTags: ['Python', 'Pandas', 'PyQt6', 'Matplotlib'],
       githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com'
+      liveUrl: 'https://example.com',
+      image: 'https://via.placeholder.com/400x300/000000/FFFFFF?text=Data+Tool'
     }
   ]
 
@@ -50,74 +53,74 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-20 pl-64 text-white bg-black">
-      <div className="grid-brutalist">
-        <div className="grid-item-1">
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="p-6 text-4xl font-bold border-4 md:text-6xl text-display border-accent"
-          >
-            PROJECTS
-          </motion.h2>
-        </div>
-        <div className="grid-item-2">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid gap-8 md:grid-cols-2"
-          >
-            {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, boxShadow: '0 0 20px #00ff88' }}
-                className="relative overflow-hidden bg-black card-brutalist"
-              >
-                {/* Geometric Pattern */}
-                <div className="absolute top-4 right-4 opacity-20">
-                  <svg width="40" height="40" viewBox="0 0 40 40">
-                    <polygon points="20,5 35,20 20,35 5,20" fill="#00ff88" />
-                  </svg>
-                </div>
-                <h3 className="mb-3 text-xl font-bold text-display">{project.title}</h3>
-                <p className="mb-4 opacity-80">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.techTags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 font-mono text-xs text-black border-2 bg-accent border-accent"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex space-x-4">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1 transition-all border-2 text-accent hover:glow-accent border-accent hover:bg-accent hover:text-black"
+    <section id="projects" className="py-20 bg-white">
+      <div className="px-4 mx-auto max-w-7xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-16 text-4xl font-bold text-center text-black md:text-6xl text-display"
+        >
+          PROJECTS
+        </motion.h2>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {projects.map((project) => (
+            <motion.div
+              key={project.id}
+              variants={itemVariants}
+              className="cursor-pointer group"
+            >
+              <div className="bg-gray-100 aspect-[4/3] mb-4 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-black">{project.title}</h3>
+              <p className="mb-4 text-sm text-gray-600">{project.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.techTags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 text-xs font-medium text-gray-800 bg-gray-200 rounded-full"
                   >
-                    GITHUB
-                  </a>
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1 transition-all border-2 text-accent hover:glow-accent border-accent hover:bg-accent hover:text-black"
-                  >
-                    LIVE
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex space-x-4">
+                <motion.a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-black transition-colors hover:text-gray-600"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  GITHUB →
+                </motion.a>
+                <motion.a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-black transition-colors hover:text-gray-600"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  LIVE →
+                </motion.a>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )
